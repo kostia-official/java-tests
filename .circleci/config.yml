@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/project/stats-tests
+    working_directory: ~/project
     docker:
     - image: maven:3.5.4-jdk-8-alpine
     steps:
@@ -19,4 +19,4 @@ jobs:
 #          paths:
 #          - ~/.m2
 #          key: v1-dependencies-{{ checksum "pom.xml" }}
-    - run: mvn test
+    - run: ls
