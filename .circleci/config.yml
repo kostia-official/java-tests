@@ -8,7 +8,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-{{ checksum "stats-tests/pom.xml" }}
             - v1-dependencies- # fallback to using the latest cache if no exact match is found
       - run: mvn dependency:go-offline
       - run:
@@ -18,7 +18,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
+          key: v1-dependencies-{{ checksum "stats-tests/pom.xml" }}
       - run:
           name: Stats tests
           command: mvn test || exit 0 # Always exit with success code. Commit status should not be failed.
