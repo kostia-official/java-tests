@@ -10,10 +10,9 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "stats-tests/pom.xml" }}
             - v1-dependencies- # fallback to using the latest cache if no exact match is found
-      - run: mvn dependency:go-offline
       - run:
           name: Install dependencies
-          command: mvn install
+          command: mvn dependency:go-offline
           working_directory: stats-tests
       - save_cache:
           paths:
