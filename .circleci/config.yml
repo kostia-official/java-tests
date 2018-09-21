@@ -3,23 +3,23 @@ jobs:
   build:
     working_directory: ~/project/stats-tests
     docker:
-    - image: maven:3.5.4-jdk-8-alpine
+      - image: maven:3.5.4-jdk-8-alpine
     steps:
-    - checkout
-#      # Download and cache dependencies
-#      - restore_cache:
-#          keys:
-#          - v1-dependencies-{{ checksum "pom.xml" }}
-#          # fallback to using the latest cache if no exact match is found
-#          - v1-dependencies-
-#
-#      - run: mvn dependency:go-offline
-#
-#      - save_cache:
-#          paths:
-#          - ~/.m2
-#          key: v1-dependencies-{{ checksum "pom.xml" }}
-    - run:
-        name: Stats tests
-        command: mvn test || exit 0 # Always exit with success code. Commit status should not be failed.
-        working_directory: stats-tests
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies- # fallback to using the latest cache if no exact match is found
+      - run: mvn dependency:go-offline
+      - run:
+          name: Install dependencies
+          command: mvn dependency:go-offline
+          working_directory: stats-tests
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+      - run:
+          name: Stats tests
+          command: mvn test || exit 0 # Always exit with success code. Commit status should not be failed.
+          working_directory: stats-tests
