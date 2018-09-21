@@ -19,4 +19,6 @@ jobs:
 #          paths:
 #          - ~/.m2
 #          key: v1-dependencies-{{ checksum "pom.xml" }}
-    - run: ls
+    - run:
+        command: mvn test
+        working_directory: stats-tests
