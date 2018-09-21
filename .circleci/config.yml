@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/project
+    working_directory: ~/project/stats-tests
     docker:
     - image: maven:3.5.4-jdk-8-alpine
     steps:
