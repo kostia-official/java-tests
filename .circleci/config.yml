@@ -13,7 +13,7 @@ jobs:
       - run: mvn dependency:go-offline
       - run:
           name: Install dependencies
-          command: mvn dependency:go-offline
+          command: mvn install
           working_directory: stats-tests
       - save_cache:
           paths:
